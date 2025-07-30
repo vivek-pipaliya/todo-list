@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practical 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            outline: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Wix Madefor Text", sans-serif;
+        }
+
+        .container {
+            max-width: 1280px;
+            padding: 0 16px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: #F1ECE6;
+        }
+
+        .image img {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .head {
+            background-color: #f1ece6b3;
+            margin: 0;
+        }
+
+        .personal {
+            font-size: 32px;
+            text-align: center;
+            margin: 0;
+            padding-top: 20px;
+            padding-bottom: 5px;
+            position: relative;
+        }
+
+        .personal::before {
+            position: absolute;
+            content: "";
+            border-bottom: 5px solid #D98326;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+        }
+
+        .field {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .inputbox {
+            margin: 0 auto;
+            display: flex;
+            background-color: #F1ECE6;
+            border-radius: 50px;
+            width: 1040px;
+            height: 78px;
+            justify-content: space-between;
+        }
+
+        .inputbox .need {
+            border: none;
+            padding: 0 15px;
+            font-size: 32px;
+            background: transparent;
+        }
+
+        .inputbox .button {
+            background-color: #76B7CD;
+            color: white;
+            border: none;
+            padding: 10px 27px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 38px;
+            border-radius: 0 50px 50px 0;
+        }
+
+        .list {
+            background-color: #F1ECE6;
+            border-radius: 50px;
+        }
+
+        .form {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .form::after {
+            position: absolute;
+            content: "";
+            bottom: 0;
+            left: 40px;
+            width: 90%;
+            border-bottom: 1px solid #76B7CD;
+        }
+
+        .form img {
+            padding-right: 56px;
+        }
+
+        .button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .radio {
+            display: block;
+            position: relative;
+            padding-left: 90px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            cursor: pointer;
+            font-size: 32px;
+            color: black;
+            transition: all 0.2s ease;
+        }
+
+        .form .radio:hover {
+            color: #000;
+        }
+
+        .form .input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .form .checkmark {
+            position: absolute;
+            top: 30px;
+            left: 50px;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #737373;
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+
+        .form .radio:hover .checkmark {
+            border-color: #555;
+        }
+
+        .form .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 5px;
+            left: 2px;
+            width: 25px;
+            height: 12px;
+            border-radius: 50%;
+            background-image: url(./images/orange_checkmark.svg);
+            background-repeat: no-repeat;
+        }
+
+        .form .input:checked~.checkmark:after {
+            display: block;
+        }
+
+        .remove {
+            display: flex;
+            justify-content: end;
+            margin-top: 97px;
+            margin-right: 76px;
+            gap: 10px;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .clear {
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="image">
+            <img src="./images/todo_logo.svg" alt="todo_logo" width="230px" height="60px">
+        </div>
+    </header>
+    <section class="head">
+        <h1 class="personal">Personal</h1>
+    </section>
+    <main>
+        <section class="container field">
+            <div class="inputbox">
+                <input id="datainput" class="need" type="text" placeholder="What do you need to do?">
+                <button id="addbutton" class="button">ADD</button>
+            </div>
+        </section>
+        <section class="container">
+            <div class="list">
+                <div id="todolist">
+                    <span >
+                        <!-- <div class="form">
+                        <label class="radio">Personal Work No. 1
+                            <input class="input" type="checkbox" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                    <div>
+                        <button onclick="deleteitem()" class="button">
+                            <img src="./images/delete.svg" alt="delete">
+                        </button>
+                    </div>
+                    </div> -->
+                   </span>
+                </div>
+                <p id="show"></p>
+                <div class="remove" onclick="emptyarray()">
+                    <img src="./images/remove.svg" alt="remove" width="28px" height="34px">
+                    <p class="clear">Clear Completed</p>
+                </div>
+            </div>
+        </section>
+    </main> 
+    <script src="todo-list.js"></script>
+</body>
+
+</html>
