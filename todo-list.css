@@ -111,6 +111,20 @@ body {
     cursor: pointer;
 }
 
+.add {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+     background-color: #76B7CD;
+    color: white;
+    border: none;
+    padding: 10px 27px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 38px;
+    border-radius: 0 50px 50px 0;   
+}
+
 .radio {
     display: block;
     position: relative;
