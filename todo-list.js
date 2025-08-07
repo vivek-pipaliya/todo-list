@@ -3,18 +3,21 @@ const addButton = document.getElementById("addbutton"); // accessing add button
 const todo = document.getElementById("todolist"); // access the todolist id which stores the value/html
 
 let array = []; //creating an empty array
-let editIndex = null;
+let editIndex = false;
 
 addButton.addEventListener("click", () => {  // function for adding value
-    const getValue = addValue.value;  //storing input value into variable
-    // console.log(getValue)
+    let getValue = addValue.value;  //storing input value into variable
     if (getValue) {
-
-        array.push(getValue) // add value to array
+        if (editIndex !== false) {
+            array[editIndex] = addValue.value;
+            editIndex = false;
+            addButton.innerHTML = "ADD"
+        } else {
+            array.push(getValue) // add value to array
+        }
+        addValue.value = ""; // after adding value clearing the input field
+        repeate();
     }
-    addValue.value = ""; // after adding value clearing the input field
-    repeate();
-
 })
 
 let repeate = () => {
@@ -22,24 +25,29 @@ let repeate = () => {
     for (let i = 0; i < array.length; i++) {
         let datainput = `<div class="form">
                             <label class="radio">${array[i]}
-                                <input class="input edit-button" type="checkbox" name="radio">
+                                <input class="input edit-button" type="checkbox" id="${i}" name="radio">
                                 <span class="checkmark"></span>
                             </label>
                             <div>
                                 <button class="button" class="delete" id="del">
-                                    <img class="delete-button" src="./images/delete.svg" alt="delete">
+                                    <img class="delete-button" src="./images/delete.svg" id="${i}" alt="delete">
                                 </button>
                             </div>
                         </div>
                     </span>
                 </div>`
-        document.getElementById("todolist").innerHTML += datainput; // adding value to container 
+       todo.innerHTML += datainput; // adding value to container 
     }
 
     let stringValue = JSON.stringify(array);
     localStorage.setItem("array", stringValue);
     let valueBack = localStorage.getItem("array");
     array = JSON.parse(valueBack);
+
+    const editButton = document.querySelectorAll('.edit-button');
+    editButton.forEach((editBtn) => {
+        editBtn.addEventListener("click", editValue);
+    })
 
     const remove = document.querySelectorAll(".remove")
     remove.forEach((remove) => {
@@ -50,17 +58,15 @@ let repeate = () => {
     deleteButton.forEach((deleteButton) => {
         deleteButton.addEventListener("click", deleteValue);
     })
-
-    const editButton = document.querySelectorAll('.edit-button');
-    editButton.forEach((editButton) => {
-        editButton.addEventListener("click", editValue);
-    })
 }
 
 const editValue = (event) => {
-    index = event.target.value;
-    addValue.value = array[index];
-    addButton.innerText = "EDIT"    
+    console.log(event.target)
+    const editInd = event.target.id;
+    // console.log("ko", editInd);
+    addValue.value = array[editInd];
+    editIndex = editInd;
+    addButton.innerHTML = "EDIT";
 }
 
 const removeValue = () => {
